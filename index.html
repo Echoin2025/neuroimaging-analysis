@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神经影像技术对比分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100">
+    <div class="min-h-screen p-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- 标题 -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-slate-800 mb-4">神经影像技术对比分析</h1>
+                <p class="text-slate-600 text-lg">点击技术卡片查看详细信息</p>
+            </div>
+
+            <!-- 分辨率对比图 -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">时间-空间分辨率对比</h2>
+                <div class="relative h-96 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8">
+                    <!-- 坐标轴 -->
+                    <div class="absolute bottom-8 left-8 right-8 h-px bg-slate-300"></div>
+                    <div class="absolute bottom-8 left-8 top-8 w-px bg-slate-300"></div>
+                    
+                    <!-- 标签 -->
+                    <div class="absolute bottom-2 right-8 text-sm text-slate-600 font-medium">空间分辨率 →</div>
+                    <div class="absolute top-8 left-2 text-sm text-slate-600 font-medium -rotate-90 origin-left">时间分辨率 →</div>
+
+                    <!-- 技术点位 -->
+                    <div class="absolute bottom-32 left-32 transform -translate-x-1/2 -translate-y-1/2">
+                        <div class="bg-green-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg">EEG</div>
+                        <div class="text-xs text-slate-600 mt-1">时间高/空间低</div>
+                    </div>
+
+                    <div class="absolute bottom-28 left-48 transform -translate-x-1/2 -translate-y-1/2">
+                        <div class="bg-purple-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg">MEG</div>
+                        <div class="text-xs text-slate-600 mt-1">时间高/空间中</div>
+                    </div>
+
+                    <div class="absolute bottom-20 left-64 transform -translate-x-1/2 -translate-y-1/2">
+                        <div class="bg-red-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg">fNIRS</div>
+                        <div class="text-xs text-slate-600 mt-1">时间高/空间中</div>
+                    </div>
+
+                    <div class="absolute bottom-48 right-32 transform -translate-x-1/2 -translate-y-1/2">
+                        <div class="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg">fMRI</div>
+                        <div class="text-xs text-slate-600 mt-1">时间中/空间高</div>
+                    </div>
+
+                    <div class="absolute bottom-32 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <div class="bg-yellow-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg">TMS</div>
+                        <div class="text-xs text-slate-600 mt-1">时间高/空间中</div>
+                    </div>
+
+                    <div class="absolute bottom-16 left-40 transform -translate-x-1/2 -translate-y-1/2">
+                        <div class="bg-indigo-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg">tDCS</div>
+                        <div class="text-xs text-slate-600 mt-1">时间低/空间低</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技术卡片容器 -->
+            <div id="techCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"></div>
+
+            <!-- 技术选择指南 -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">技术选择指南</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <h3 class="font-bold text-blue-900 mb-3">需要高空间分辨率</h3>
+                        <p class="text-sm text-slate-700 mb-2"><strong>首选：</strong>fMRI - 可精确定位到毫米级别的脑区活动</p>
+                        <p class="text-sm text-slate-700"><strong>次选：</strong>MEG - 空间分辨率略低但时间精度高</p>
+                    </div>
+
+                    <div class="bg-green-50 rounded-lg p-6">
+                        <h3 class="font-bold text-green-900 mb-3">需要高时间分辨率</h3>
+                        <p class="text-sm text-slate-700 mb-2"><strong>首选：</strong>EEG/MEG - 毫秒级时间精度</p>
+                        <p class="text-sm text-slate-700"><strong>次选：</strong>fNIRS - 0.1秒级时间精度</p>
+                    </div>
+
+                    <div class="bg-purple-50 rounded-lg p-6">
+                        <h3 class="font-bold text-purple-900 mb-3">需要建立因果关系</h3>
+                        <p class="text-sm text-slate-700 mb-2"><strong>首选：</strong>TMS - 可直接调控脑活动</p>
+                        <p class="text-sm text-slate-700"><strong>次选：</strong>tDCS - 调控效应较温和</p>
+                    </div>
+
+                    <div class="bg-yellow-50 rounded-lg p-6">
+                        <h3 class="font-bold text-yellow-900 mb-3">需要便携性/低成本</h3>
+                        <p class="text-sm text-slate-700 mb-2"><strong>首选：</strong>EEG/tDCS - 设备简单便携</p>
+                        <p class="text-sm text-slate-700"><strong>次选：</strong>fNIRS - 便携但成本较高</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center text-sm text-slate-500">
+                <p>提示：点击技术卡片可展开查看详细信息</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const technologies = [
+            {
+                id: 'fMRI',
+                name: 'fMRI',
+                fullName: '功能性磁共振成像',
+                icon: '🧠',
+                spatialResolution: '高 (1-3mm)',
+                temporalResolution: '中 (1-2秒)',
+                color: 'bg-blue-500',
+                advantages: [
+                    '空间分辨率高，可精确定位脑区',
+                    '无创、无辐射，安全性好',
+                    '可测量全脑活动',
+                    '可重复性强'
+                ],
+                disadvantages: [
+                    '时间分辨率较低',
+                    '设备昂贵，运行成本高',
+                    '对运动伪影敏感',
+                    '噪音较大，受试者体验欠佳'
+                ],
+                applications: [
+                    '认知神经科学研究',
+                    '脑功能网络分析',
+                    '临床神经疾病诊断',
+                    '术前脑功能定位'
+                ]
+            },
+            {
+                id: 'fNIRS',
+                name: 'fNIRS',
+                fullName: '功能性近红外光谱',
+                icon: '📡',
+                spatialResolution: '中 (1-3cm)',
+                temporalResolution: '高 (0.1秒)',
+                color: 'bg-red-500',
+                advantages: [
+                    '便携性强，可用于自然环境',
+                    '对运动伪影耐受性好',
+                    '成本相对较低',
+                    '无噪音，受试者舒适度高'
+                ],
+                disadvantages: [
+                    '只能测量皮层表面活动',
+                    '穿透深度有限（2-3cm）',
+                    '空间分辨率低于fMRI',
+                    '易受头发、头皮血流影响'
+                ],
+                applications: [
+                    '婴幼儿认知发展研究',
+                    '社会互动研究',
+                    '运动控制研究',
+                    '脑机接口应用'
+                ]
+            },
+            {
+                id: 'MEG',
+                name: 'MEG',
+                fullName: '脑磁图',
+                icon: '🔷',
+                spatialResolution: '中高 (2-5mm)',
+                temporalResolution: '极高 (毫秒级)',
+                color: 'bg-purple-500',
+                advantages: [
+                    '时间分辨率极高',
+                    '空间定位较准确',
+                    '直接测量神经元活动',
+                    '不受颅骨影响'
+                ],
+                disadvantages: [
+                    '设备极其昂贵',
+                    '需要屏蔽室环境',
+                    '对深部脑区信号弱',
+                    '维护成本高'
+                ],
+                applications: [
+                    '癫痫病灶定位',
+                    '语言功能研究',
+                    '感知觉时间进程研究',
+                    '术前功能定位'
+                ]
+            },
+            {
+                id: 'EEG',
+                name: 'EEG',
+                fullName: '脑电图',
+                icon: '📊',
+                spatialResolution: '低 (数厘米)',
+                temporalResolution: '极高 (毫秒级)',
+                color: 'bg-green-500',
+                advantages: [
+                    '时间分辨率极高',
+                    '成本低，便携性好',
+                    '易于操作和普及',
+                    '可长时间监测'
+                ],
+                disadvantages: [
+                    '空间分辨率差',
+                    '受颅骨、头皮影响大',
+                    '源定位不准确',
+                    '易受眼电、肌电干扰'
+                ],
+                applications: [
+                    '睡眠研究',
+                    '癫痫监测与诊断',
+                    '事件相关电位研究',
+                    '脑机接口'
+                ]
+            },
+            {
+                id: 'TMS',
+                name: 'TMS',
+                fullName: '经颅磁刺激',
+                icon: '⚡',
+                spatialResolution: '中 (0.5-1cm)',
+                temporalResolution: '高 (毫秒级)',
+                color: 'bg-yellow-500',
+                advantages: [
+                    '可建立因果关系',
+                    '无创、安全性好',
+                    '时间精度高',
+                    '可用于治疗应用'
+                ],
+                disadvantages: [
+                    '只能刺激皮层区域',
+                    '穿透深度有限',
+                    '不能同时刺激多个脑区',
+                    '个体间效应差异大'
+                ],
+                applications: [
+                    '脑功能因果性验证',
+                    '抑郁症治疗',
+                    '运动皮层兴奋性研究',
+                    '认知功能调控'
+                ]
+            },
+            {
+                id: 'tDCS',
+                name: 'tDCS',
+                fullName: '经颅直流电刺激',
+                icon: '🎯',
+                spatialResolution: '低 (数厘米)',
+                temporalResolution: '低 (分钟级)',
+                color: 'bg-indigo-500',
+                advantages: [
+                    '设备简单便携',
+                    '成本极低',
+                    '安全性高',
+                    '可长时间调控'
+                ],
+                disadvantages: [
+                    '空间和时间精度都较低',
+                    '作用机制不完全清楚',
+                    '个体差异大',
+                    '效应较弱'
+                ],
+                applications: [
+                    '认知功能增强',
+                    '神经康复治疗',
+                    '疼痛管理',
+                    '精神疾病辅助治疗'
+                ]
+            }
+        ];
+
+        let selectedTech = null;
+
+        function renderCards() {
+            const container = document.getElementById('techCards');
+            container.innerHTML = '';
+
+            technologies.forEach(tech => {
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-xl shadow-lg p-6 cursor-pointer transform transition-all hover:scale-105 ${
+                    selectedTech === tech.id ? 'ring-4 ring-blue-400' : ''
+                }`;
+                card.onclick = () => {
+                    selectedTech = selectedTech === tech.id ? null : tech.id;
+                    renderCards();
+                };
+
+                const detailsHTML = selectedTech === tech.id ? `
+                    <div class="mt-4 pt-4 border-t border-slate-200 space-y-4 fade-in">
+                        <div>
+                            <h4 class="font-semibold text-green-700 mb-2 flex items-center gap-2">
+                                <span class="text-lg">✓</span> 优点
+                            </h4>
+                            <ul class="space-y-1">
+                                ${tech.advantages.map(adv => `<li class="text-sm text-slate-700 pl-4">• ${adv}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-red-700 mb-2 flex items-center gap-2">
+                                <span class="text-lg">✗</span> 缺点
+                            </h4>
+                            <ul class="space-y-1">
+                                ${tech.disadvantages.map(dis => `<li class="text-sm text-slate-700 pl-4">• ${dis}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-blue-700 mb-2 flex items-center gap-2">
+                                <span class="text-lg">◆</span> 应用场景
+                            </h4>
+                            <ul class="space-y-1">
+                                ${tech.applications.map(app => `<li class="text-sm text-slate-700 pl-4">• ${app}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                ` : '';
+
+                card.innerHTML = `
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="${tech.color} text-white p-3 rounded-lg text-2xl">
+                            ${tech.icon}
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">${tech.name}</h3>
+                            <p class="text-sm text-slate-600">${tech.fullName}</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-600">空间分辨率</span>
+                            <span class="text-sm font-semibold text-slate-800">${tech.spatialResolution}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-600">时间分辨率</span>
+                            <span class="text-sm font-semibold text-slate-800">${tech.temporalResolution}</span>
+                        </div>
+                    </div>
+                    ${detailsHTML}
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        renderCards();
+    </script>
+</body>
+</html>
